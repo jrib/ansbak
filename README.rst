@@ -25,12 +25,24 @@ With ansbak:
 .. code-block:: bash
 
     $ ansible host1:host2 -m shell -a 'echo foo\\nbar'  | ansbak.py
-    ['host1', 'host2'] | success | rc=0 >>
+    host1,host2 | success | rc=0 >>
+    foo
+    bar
+
+To allow ansible to colour code, you
+can force_ it with the following, which ansbak can still parse:
+
+.. _force: https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-force-color
+
+.. code-block:: bash
+
+    $ export ANSIBLE_FORCE_COLOR=true
+    $ ansible host1:host2 -m shell -a 'echo foo\\nbar'  | ansbak.py
+    host1,host2 | success | rc=0 >>
     foo
     bar
 
 Todo
 ----
 
-* Color-code output (like ansible already does) or document how to force ansible to print with color
 * Group hostnames more intelligently, e.g., "host1-3" instead of "host1, host2, host3"
