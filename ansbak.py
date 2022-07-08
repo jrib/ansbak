@@ -43,7 +43,7 @@ def main():
 
     for (return_msg, rc, out), hostgroup in results.items():
         print('{hostgroup} | {return_msg} | rc={rc} >>'.format(
-            hostgroup=hostgroup,
+            hostgroup=','.join(hostgroup),
             return_msg=return_msg,
             rc=rc))
         print(out)
