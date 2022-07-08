@@ -41,12 +41,12 @@ def main():
         value = host
         results[key].append(value)
 
-    for (return_msg, rc, out), hostgroup in results.iteritems():
-        print '{hostgroup} | {return_msg} | rc={rc} >>'.format(
+    for (return_msg, rc, out), hostgroup in results.items():
+        print('{hostgroup} | {return_msg} | rc={rc} >>'.format(
             hostgroup=hostgroup,
             return_msg=return_msg,
-            rc=rc)
-        print out
+            rc=rc))
+        print(out)
 
 
 if __name__ == '__main__':
