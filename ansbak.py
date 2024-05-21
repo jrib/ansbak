@@ -77,8 +77,8 @@ def main():
             rc=rc))
         print(out)
 
-#        if return_msg != "UNREACHABLE!":
-#            print('--------------------')
+        if return_msg != "UNREACHABLE!":
+            print('--------------------')
 
 
 if __name__ == '__main__':
