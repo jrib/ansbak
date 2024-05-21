@@ -71,14 +71,14 @@ def main():
     # "UNREACHABLE!" comes out before "CHANGED"), then (already sorted
     # and comma-separated) hostgroup, second
     for (return_msg, rc, out), hostgroup in sorted(sorted(results.items(), key=sort_hostgroups), key=sort_return_msg, reverse=True):
+        if return_msg != "UNREACHABLE!":
+            print('--------------------')
+
         print('{hostgroup} | {return_msg} {rc}'.format(
             hostgroup=hostgroup,
             return_msg=return_msg,
             rc=rc))
         print(out)
-
-        if return_msg != "UNREACHABLE!":
-            print('--------------------')
 
 
 if __name__ == '__main__':
