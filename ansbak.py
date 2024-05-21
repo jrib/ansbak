@@ -9,8 +9,7 @@ import sys
 import collections
 
 
-HEADER_success = re.compile('(?P<hostname>\S*) \| (?P<return_msg>\S*) \| rc=(?P<return_code>\S*) >>')
-HEADER_failure = re.compile('(?P<hostname>\S*) \| (?P<return_msg>\S*) => {')
+HEADER = re.compile('(?P<hostname>\S*) \| (?P<return_msg>\S*) (?P<return_code>\| rc=\S* >>|=> {)')
 
 
 def main():
@@ -22,8 +21,8 @@ def main():
     rc = ''
 
     for line in sys.stdin:
-        match_host = HEADER_success.match(line)
-        if match_host:
+        m = HEADER.match(line)
+        if m:
             # new host
             # save output of previous host if any
             if host:
@@ -31,22 +30,10 @@ def main():
                 value = host
                 results[key].append(value)
             # now set these values for the new host
-            (host, return_msg, rc) = match_host.groups()
+            (host, return_msg, rc) = m.groups()
             out = ''
         else:
-            match_fail = HEADER_failure.match(line)
-            if match_fail:
-                # new failed host
-                # save output of previous host if any
-                if host:
-                    key = (return_msg, rc, out)
-                    value = host
-                    results[key].append(value)
-                # now set these values for the new host
-                (host, return_msg) = match_fail.groups()
-                out = ''
-            else:
-                out += line
+            out += line
 
     # save output of last host
     if host:
@@ -55,7 +42,7 @@ def main():
         results[key].append(value)
 
     for (return_msg, rc, out), hostgroup in results.items():
-        print('{hostgroup} | {return_msg} | rc={rc} >>'.format(
+        print('{hostgroup} | {return_msg} {rc}'.format(
             hostgroup=','.join(hostgroup),
             return_msg=return_msg,
             rc=rc))
