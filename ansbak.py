@@ -9,7 +9,7 @@ import sys
 import collections
 
 
-HEADER = re.compile('(?P<hostname>\S*) \| (?P<return_msg>\S*) \| rc=(?P<return_code>\S*) >>')
+HEADER = re.compile(r'(?P<hostname>\S*) \| (?P<return_msg>\S*) \| rc=(?P<return_code>\S*) >>')
 
 
 def main():
