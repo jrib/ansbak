@@ -42,6 +42,13 @@ can force_ it with the following, which ansbak can still parse:
     foo
     bar
 
+Tests
+-----
+
+To run tests:
+
+    $ pytest
+
 Todo
 ----
 

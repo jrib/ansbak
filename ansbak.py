@@ -12,7 +12,7 @@ import collections
 HEADER = re.compile(r'(?P<hostname>\S*) \| (?P<return_msg>\S*) \| rc=(?P<return_code>\S*) >>')
 
 
-def main():
+def main(lines):
     results = collections.defaultdict(list)
 
     host = ''
@@ -20,7 +20,7 @@ def main():
     return_msg = ''
     rc = ''
 
-    for line in sys.stdin:
+    for line in lines:
         m = HEADER.match(line)
         if m:
             # new host
@@ -50,4 +50,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.stdin)
