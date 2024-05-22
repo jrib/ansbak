@@ -20,6 +20,30 @@ def test_main_groups_hosts(capsys):
     assert captured.out == expected_output
 
 
+def test_main_groups_hosts_with_different_output(capsys):
+    ansible_output = dedent("""\
+        red01 | CHANGED | rc=0 >>
+        foo
+        red02 | CHANGED | rc=0 >>
+        bar
+        red03 | CHANGED | rc=0 >>
+        foo
+    """).splitlines(keepends=True)
+    main(ansible_output)
+    captured = capsys.readouterr()
+
+    expected_output = dedent("""\
+        red01,red03 | CHANGED | rc=0 >>
+        foo
+
+        --------------------
+        red02 | CHANGED | rc=0 >>
+        bar
+
+    """)
+    assert captured.out == expected_output
+
+
 def test_main_shows_unreachable_first(capsys):
     ansible_output = dedent("""\
         red01 | CHANGED | rc=0 >>
