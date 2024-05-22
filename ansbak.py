@@ -70,8 +70,8 @@ def main(lines):
     # Sort each grouped output based on reverse status first (so
     # "UNREACHABLE!" comes out before "CHANGED"), then (already sorted
     # and comma-separated) hostgroup, second
-    for (return_msg, rc, out), hostgroup in sorted(sorted(results.items(), key=sort_hostgroups), key=sort_return_msg, reverse=True):
-        if return_msg != "UNREACHABLE!":
+    for i, ((return_msg, rc, out), hostgroup) in enumerate(sorted(sorted(results.items(), key=sort_hostgroups), key=sort_return_msg, reverse=True)):
+        if i != 0:
             print('--------------------')
 
         print('{hostgroup} | {return_msg} {rc}'.format(
