@@ -47,6 +47,8 @@ Tests
 
 To run tests:
 
+.. code-block:: bash
+
     $ pytest
 
 Todo
