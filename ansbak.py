@@ -63,9 +63,8 @@ def main(lines):
     # about the ANSI colour codes that might appear in front of each
     # host if you forced ansible colour output - they all sort the
     # same regardless
-    for (return_msg, rc, out), hostgroup in results.items():
-        key = (return_msg, rc, out)
-        results[key] = ','.join(sorted(results[key]))
+    for key, hostgroups in results.items():
+        results[key] = ','.join(sorted(hostgroups))
 
     # Sort each grouped output based on reverse status first (so
     # "UNREACHABLE!" comes out before "CHANGED"), then (already sorted
