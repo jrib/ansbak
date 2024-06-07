@@ -73,7 +73,7 @@ def main(lines):
     # and comma-separated) hostgroup, second
     sorted_results = sorted(sorted(results.items(), key=sort_hostgroups), key=sort_return_msg, reverse=True)
     for i, ((return_msg, rc, out), hostgroup) in enumerate(sorted_results):
-        if i != 0:
+        if i != 0 and return_msg != "UNREACHABLE!":
             print('--------------------')
 
         print(f'{hostgroup} | {return_msg} {rc}')
